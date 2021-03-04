@@ -45,8 +45,8 @@ class BlocklistUpdater:
         for url in blocklist.copy():
             try:
                 self._append_to_adlists(url)
-            except HTTPError:
-                print(f"Error at {url}\n")
+            except HTTPError as http_error:
+                print(f"Error at {url}, error: {http_error.reason}\n")
                 blocklist.remove(url)
             except URLError:
                 print(f"Connection refused by {url}\n")
